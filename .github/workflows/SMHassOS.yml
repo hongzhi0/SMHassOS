@@ -43,7 +43,7 @@ jobs:
     
     - name: Change Settings.
       run: |
-        cd HassOS
+        cd SMHassOS
         sed -i 's/-e\ BUILDER_UID/-e TZ=Asia\/Shanghai\ -e BUILDER_UID/g' buildroot-external/package/hassio/hassio.mk 
         sed -i 's/-e\ BUILDER_UID/-e TZ=Asia\/Shanghai\ -e BUILDER_UID/g' scripts/enter.sh
         sed -i 's/-e\ SUPERVISOR_NAME=hassio_supervisor/-e TZ=Asia\/Shanghai\ -e SUPERVISOR_NAME=hassio_supervisor/g' buildroot-external/rootfs-overlay/usr/sbin/hassos-supervisor
@@ -75,7 +75,7 @@ jobs:
       id: build
       run: |
         sleep $((RANDOM % 60))    
-        cd HassOS
+        cd SMHassOS
         ./scripts/enter.sh make -j$(($(nproc) + 1)) ${{matrix.target}}
         
     - name: Upload Firmware
